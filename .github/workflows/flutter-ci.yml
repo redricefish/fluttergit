@@ -1,0 +1,24 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v2
+
+      - name: Flutterのセットアップ
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'latest'
+
+      - name: 依存関係の取得
+        run: flutter pub get
+
+      - name: Webビルド
+        run: flutter build web --release
