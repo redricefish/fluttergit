@@ -28,3 +28,9 @@ jobs:
 
       - name: Webビルド
         run: flutter build web --release
+
+      - name: アーティファクトのアップロード
+  		uses: actions/upload-artifact@v3
+  		with:
+    		name: flutter-web-build
+    		path: build/web
