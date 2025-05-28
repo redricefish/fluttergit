@@ -9,16 +9,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: ƒ`ƒFƒbƒNƒAƒEƒg
+      - name: ãƒã‚§ãƒƒã‚¯ã‚¢ã‚¦ãƒˆ
         uses: actions/checkout@v2
 
-      - name: Flutter‚ÌƒZƒbƒgƒAƒbƒv
+      - name: Test connection
+        run: curl "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json"
+
+      - name: Flutterã‚­ãƒ£ãƒƒã‚·ãƒ¥å‰Šé™¤
+        run: flutter clean && rm -rf ~/.pub-cache
+
+      - name: Flutterã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'latest'
+          flutter-version: '3.32.0'
 
-      - name: ˆË‘¶ŠÖŒW‚Ìæ“¾
+      - name: Fix Flutter SDK folder permission
+        run: git config --global --add safe.directory /tmp/flutter/
+
+      - name: ä¾å­˜é–¢ä¿‚ã®å–å¾—
         run: flutter pub get
 
-      - name: Webƒrƒ‹ƒh
+      - name: Webãƒ“ãƒ«ãƒ‰
         run: flutter build web --release
